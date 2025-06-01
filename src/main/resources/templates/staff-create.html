@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Form nhập thông tin</title>
+  <style>
+    label {
+      font-weight: bold;
+    }
+    .form-group {
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<i th:text="${message}"></i>
+
+<form th:object="${staff}" action="/staff/create/save" method="post" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <label for="id">Email:</label>
+    <span class="hint">(bắt buộc, đúng định dạng)</span><br>
+    <input id="id" th:field="*{id}"> <i th:errors="*{id}"></i>
+  </div>
+
+  <div class="form-group">
+    <label for="fullname">Họ và tên:</label>
+    <span class="hint">(bắt buộc)</span><br>
+    <input id="fullname" th:field="*{fullname}"> <i th:errors="*{fullname}"></i>
+  </div>
+
+  <div class="form-group">
+    <label>Giới tính:</label>
+    <span class="hint">(phải chọn)</span><br>
+    <label><input type="radio" th:field="*{gender}" value="true"> Nam</label>
+    <label><input type="radio" th:field="*{gender}" value="false"> Nữ</label>
+    <i th:errors="*{gender}"></i>
+  </div>
+
+  <div class="form-group">
+    <label for="birthday">Ngày sinh:</label>
+    <span class="hint">(bắt buộc MM/dd/yyyy, phải là ngày quá khứ)</span><br>
+    <input id="birthday" name="birthday" th:value="*{#dates.format(birthday, 'MM/dd/yyyy')}">
+    <i th:errors="*{birthday}"></i>
+  </div>
+
+  <div class="form-group">
+    <label for="photo_file">Hình ảnh:</label><br>
+    <input th:field="*{photo}" type="hidden">
+    <input id="photo_file" name="photo_file" type="file">
+  </div>
+
+  <div class="form-group">
+    <label for="level">Cấp bậc:</label><br>
+    <select id="level" th:field="*{level}">
+      <option value="0">Úy</option>
+      <option value="1">Tá</option>
+      <option value="2">Tướng</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="salary">Lương:</label>
+    <span class="hint">(bắt buộc, từ 1000 trở lên)</span><br>
+    <input id="salary" th:field="*{salary}"> <i th:errors="*{salary}"></i>
+  </div>
+
+  <button type="submit">Validate</button>
+</form>
+
+</body>
+</html>
