@@ -10,6 +10,13 @@
     .form-group {
       margin-bottom: 12px;
     }
+    i {
+      color: red;
+    }
+    .hint {
+      font-style: italic;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -21,13 +28,15 @@
   <div class="form-group">
     <label for="id">Email:</label>
     <span class="hint">(bắt buộc, đúng định dạng)</span><br>
-    <input id="id" th:field="*{id}"> <i th:errors="*{id}"></i>
+    <input id="id" th:field="*{id}" type="email" required>
+    <i th:errors="*{id}"></i>
   </div>
 
   <div class="form-group">
     <label for="fullname">Họ và tên:</label>
     <span class="hint">(bắt buộc)</span><br>
-    <input id="fullname" th:field="*{fullname}"> <i th:errors="*{fullname}"></i>
+    <input id="fullname" th:field="*{fullname}" required>
+    <i th:errors="*{fullname}"></i>
   </div>
 
   <div class="form-group">
@@ -40,15 +49,15 @@
 
   <div class="form-group">
     <label for="birthday">Ngày sinh:</label>
-    <span class="hint">(bắt buộc MM/dd/yyyy, phải là ngày quá khứ)</span><br>
-    <input id="birthday" name="birthday" th:value="*{#dates.format(birthday, 'MM/dd/yyyy')}">
+    <span class="hint">(bắt buộc, MM/dd/yyyy, phải là ngày quá khứ)</span><br>
+    <input id="birthday" th:field="*{birthday}" type="text" placeholder="MM/dd/yyyy">
     <i th:errors="*{birthday}"></i>
   </div>
 
   <div class="form-group">
     <label for="photo_file">Hình ảnh:</label><br>
     <input th:field="*{photo}" type="hidden">
-    <input id="photo_file" name="photo_file" type="file">
+    <input id="photo_file" name="photo_file" type="file" accept="image/*">
   </div>
 
   <div class="form-group">
@@ -63,10 +72,11 @@
   <div class="form-group">
     <label for="salary">Lương:</label>
     <span class="hint">(bắt buộc, từ 1000 trở lên)</span><br>
-    <input id="salary" th:field="*{salary}"> <i th:errors="*{salary}"></i>
+    <input id="salary" th:field="*{salary}" type="number" min="1000" step="100" required>
+    <i th:errors="*{salary}"></i>
   </div>
 
-  <button type="submit">Validate</button>
+  <button type="submit">Xác nhận</button>
 </form>
 
 </body>
